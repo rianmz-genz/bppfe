@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import DefaultLayout from "../components/layout";
 import GetAllProduct from "../api/integrations/Products/GetAll";
-import { BreadCrumbsProduct } from "../components/products";
+import {
+   BreadCrumbsProduct,
+   DialogCreateProduct,
+   DialogDeleteProduct,
+} from "../components/products";
 import Loader from "../components/loader/Loader";
+import CreateProductApi from "../api/integrations/Products/Create";
 const ProductPage = () => {
    const [isLoading, setIsLoading] = useState(false);
-   const [error, setError] = useState(false);
    const [data, setData] = useState(false);
    useEffect(() => {
       getAll();
@@ -16,20 +20,28 @@ const ProductPage = () => {
          .then((res) => {
             setIsLoading(false);
             console.log(res);
-
             if (res) {
                setData(res.data);
             }
          })
          .catch((e) => {
-            setError(e);
             console.log(e);
          });
+   };
+   const handleCreate = (form) => {
+      CreateProductApi(form).then((res) => {
+         if (res.status) {
+            getAll();
+         }
+      });
    };
    return (
       <DefaultLayout>
          <BreadCrumbsProduct />
          <h1 className="text-4xl font-ysabeau font-bold mb-4 my-2">Produk</h1>
+         <div className="flex items-start my-2">
+            <DialogCreateProduct handleCreate={(e) => handleCreate(e)} />
+         </div>
          <div className="grid grid-cols-4 gap-6">
             {!isLoading &&
                data.length > 0 &&
@@ -47,9 +59,12 @@ const ProductPage = () => {
                         {item?.name}
                      </p>
                      <p>Rp. {item?.price.toLocaleString("id-ID")}</p>
+                     <div>
+                        <DialogDeleteProduct />
+                     </div>
                   </div>
                ))}
-            {isLoading && <Loader />}
+            {isLoading && <Loader className="text-black" />}
          </div>
       </DefaultLayout>
    );
