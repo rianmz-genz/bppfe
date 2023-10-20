@@ -5,9 +5,10 @@ import {
    BreadCrumbsProduct,
    DialogCreateProduct,
    DialogDeleteProduct,
+   DialogEditProduct,
 } from "../components/products";
 import Loader from "../components/loader/Loader";
-import CreateProductApi from "../api/integrations/Products/Create";
+import CreateProduct from "../api/integrations/Products/Create";
 const ProductPage = () => {
    const [isLoading, setIsLoading] = useState(false);
    const [data, setData] = useState(false);
@@ -29,7 +30,7 @@ const ProductPage = () => {
          });
    };
    const handleCreate = (form) => {
-      CreateProductApi(form).then((res) => {
+      CreateProduct(form).then((res) => {
          if (res.status) {
             getAll();
          }
@@ -42,7 +43,7 @@ const ProductPage = () => {
          <div className="flex items-start my-2">
             <DialogCreateProduct handleCreate={(e) => handleCreate(e)} />
          </div>
-         <div className="grid grid-cols-4 gap-6">
+         <div className="grid md:grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-6 grid-cols-1">
             {!isLoading &&
                data.length > 0 &&
                data.map((item, i) => (
@@ -60,7 +61,13 @@ const ProductPage = () => {
                      </p>
                      <p>Rp. {item?.price.toLocaleString("id-ID")}</p>
                      <div>
-                        <DialogDeleteProduct />
+                        <DialogDeleteProduct id={item?.id} getAll={getAll} />
+                        <DialogEditProduct
+                           name={item?.name}
+                           price={item?.price}
+                           id={item?.id}
+                           getAll={getAll}
+                        />
                      </div>
                   </div>
                ))}
