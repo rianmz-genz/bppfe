@@ -9,7 +9,7 @@ import {
    Input,
 } from "@material-tailwind/react";
 
-export function DialogWithForm({ handleCreate }) {
+function DialogCreateProduct({ handleCreate }) {
    const [open, setOpen] = useState(false);
    const handleOpen = () => setOpen((cur) => !cur);
    const [form, setForm] = useState({
@@ -19,6 +19,11 @@ export function DialogWithForm({ handleCreate }) {
    });
    const submit = () => {
       handleCreate(form);
+      setForm({
+         name: "",
+         price: "",
+         image: "",
+      });
       handleOpen();
    };
 
@@ -82,3 +87,5 @@ export function DialogWithForm({ handleCreate }) {
       </>
    );
 }
+
+export default DialogCreateProduct;
