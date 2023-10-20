@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 const BreadCrumbsLogin = () => {
    return (
       <div className="flex space-x-2">
-         <Link href={"/"} className="text-xs">
+         <Link href={"/"} className="text-sm">
             EAA
          </Link>
-         <p className="text-xs text-black/40">/</p>
-         <p className="text-xs text-black/40">Masuk</p>
+         <p className="text-sm text-black/40">/</p>
+         <p className="text-sm text-black/40">Masuk</p>
       </div>
    );
 };

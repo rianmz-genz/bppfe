@@ -1,13 +1,13 @@
-import { urlCreateProduct } from "../../routes/Products";
+import { urlEditProduct } from "../../routes/Products";
 
-const CreateProduct = async (form) => {
+const EditProduct = async ({ form, id }) => {
    try {
       const formData = new FormData();
       formData.append("name", form.name);
       formData.append("price", form.price);
       formData.append("image", form.image);
 
-      const response = await fetch(urlCreateProduct, {
+      const response = await fetch(`${urlEditProduct}/${id}`, {
          method: "POST",
          body: formData,
          headers: {
@@ -23,4 +23,4 @@ const CreateProduct = async (form) => {
       throw new Error(err);
    }
 };
-export default CreateProduct;
+export default EditProduct;

@@ -6,26 +6,25 @@ import {
    CardBody,
    CardFooter,
    Typography,
-   Input,
 } from "@material-tailwind/react";
 import { BsTrash } from "react-icons/bs";
+import DeleteProduct from "../../api/integrations/Products/Delete";
 
-function DialogDeleteProduct({ handleCreate }) {
+function DialogDeleteProduct({ id, getAll }) {
    const [open, setOpen] = useState(false);
    const handleOpen = () => setOpen((cur) => !cur);
-   const [form, setForm] = useState({
-      name: "",
-      price: "",
-      image: "",
-   });
-   const submit = () => {
-      handleCreate(form);
-      setForm({
-         name: "",
-         price: "",
-         image: "",
-      });
-      handleOpen();
+
+   const deleteProduct = () => {
+      DeleteProduct({ id })
+         .then((res) => {
+            if (res.status) {
+               getAll();
+               handleOpen();
+            }
+         })
+         .catch((e) => {
+            console.log(e);
+         });
    };
 
    return (
@@ -49,8 +48,8 @@ function DialogDeleteProduct({ handleCreate }) {
                   </Typography>
                </CardBody>
                <CardFooter className="pt-0">
-                  <Button variant="gradient" onClick={submit} fullWidth>
-                     Tambah
+                  <Button color="red" onClick={deleteProduct} fullWidth>
+                     Hapus
                   </Button>
                </CardFooter>
             </Card>
