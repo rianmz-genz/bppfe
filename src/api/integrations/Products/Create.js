@@ -1,6 +1,6 @@
 import { urlCreateProduct } from "../../routes/Products";
 
-const CreateProductApi = async (form) => {
+const CreateProduct = async (form) => {
    try {
       const formData = new FormData();
       formData.append("name", form.name);
@@ -23,4 +23,4 @@ const CreateProductApi = async (form) => {
       throw new Error(err);
    }
 };
-export default CreateProductApi;
+export default CreateProduct;
