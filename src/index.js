@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./css/tailwind.css";
 import { RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
-import { HomePage, ProductPage } from "./pages";
+import { HomePage, ProductPage, SellPage } from "./pages";
 
 import { ThemeProvider } from "@material-tailwind/react";
 const routes = createBrowserRouter([
@@ -14,6 +14,10 @@ const routes = createBrowserRouter([
    {
       path: "/products",
       element: <ProductPage />,
+   },
+   {
+      path: "/sell",
+      element: <SellPage />,
    },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
