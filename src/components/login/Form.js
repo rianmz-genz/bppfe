@@ -66,8 +66,8 @@ const FormLogin = () => {
             }
             className={`${
                form.email.length === 0 || form.password.length === 0
-                  ? "bg-green-500/60"
-                  : "bg-green-500"
+                  ? "bg-black/60"
+                  : "bg-black"
             } w-full py-4 text-white transition-all duration-300 ease-in-out flex justify-center items-center`}
          >
             {isLoading ? <Loader /> : "Masuk"}
