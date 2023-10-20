@@ -4,6 +4,8 @@ import "./css/tailwind.css";
 import { RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
 import { HomePage, ProductPage } from "./pages";
+
+import { ThemeProvider } from "@material-tailwind/react";
 const routes = createBrowserRouter([
    {
       path: "/",
@@ -17,7 +19,9 @@ const routes = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
    <React.StrictMode>
-      <RouterProvider router={routes} />
+      <ThemeProvider>
+         <RouterProvider router={routes} />
+      </ThemeProvider>
    </React.StrictMode>
 );
 
