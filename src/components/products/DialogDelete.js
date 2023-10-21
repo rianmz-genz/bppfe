@@ -29,7 +29,7 @@ function DialogDeleteProduct({ id, getAll }) {
 
    return (
       <>
-         <Button size="sm" color="red" onClick={handleOpen}>
+         <Button className="p-1" variant="text" onClick={handleOpen}>
             <BsTrash />
          </Button>
          <Dialog
