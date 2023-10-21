@@ -4,8 +4,7 @@ import GetAllProduct from "../api/integrations/Products/GetAll";
 import {
    BreadCrumbsProduct,
    DialogCreateProduct,
-   DialogDeleteProduct,
-   DialogEditProduct,
+   ProductCard,
 } from "../components/products";
 import Loader from "../components/loader/Loader";
 import CreateProduct from "../api/integrations/Products/Create";
@@ -20,7 +19,6 @@ const ProductPage = () => {
       GetAllProduct()
          .then((res) => {
             setIsLoading(false);
-            console.log(res);
             if (res) {
                setData(res.data);
             }
@@ -43,33 +41,11 @@ const ProductPage = () => {
          <div className="flex items-start my-2">
             <DialogCreateProduct handleCreate={(e) => handleCreate(e)} />
          </div>
-         <div className="grid md:grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-6 grid-cols-1">
+         <div className="flex flex-wrap gap-3">
             {!isLoading &&
                data.length > 0 &&
                data.map((item, i) => (
-                  <div
-                     key={i}
-                     className="w-full flex flex-col justify-center items-start space-y-1"
-                  >
-                     <img
-                        className="w-full h-48 object-cover"
-                        src={`data:image/png;base64,${item?.image}`}
-                        alt={item?.name}
-                     />
-                     <p className="text-2xl font-ysabeau font-bold">
-                        {item?.name}
-                     </p>
-                     <p>Rp. {item?.price.toLocaleString("id-ID")}</p>
-                     <div>
-                        <DialogDeleteProduct id={item?.id} getAll={getAll} />
-                        <DialogEditProduct
-                           name={item?.name}
-                           price={item?.price}
-                           id={item?.id}
-                           getAll={getAll}
-                        />
-                     </div>
-                  </div>
+                  <ProductCard item={item} getAll={getAll} key={i} />
                ))}
             {isLoading && <Loader className="text-black" />}
          </div>
