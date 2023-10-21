@@ -43,7 +43,7 @@ function DialogEditProduct({ name, price, id, getAll }) {
 
    return (
       <>
-         <Button size="sm" color="blue" onClick={handleOpen}>
+         <Button variant="text" className="p-1 ml-1" onClick={handleOpen}>
             <AiFillEdit />
          </Button>
          <Dialog
@@ -55,7 +55,7 @@ function DialogEditProduct({ name, price, id, getAll }) {
             <Card className="mx-auto w-full max-w-[24rem]">
                <CardBody className="flex flex-col gap-4">
                   <Typography variant="h4" color="blue-gray">
-                     Tambah Produk
+                     Ubah Produk
                   </Typography>
                   <Typography className="-mb-2" variant="h6">
                      Nama
