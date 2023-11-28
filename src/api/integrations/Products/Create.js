@@ -1,26 +1,19 @@
+import { getUid } from "..";
 import { urlCreateProduct } from "../../routes/Products";
+import { headers } from "./GetAll";
+import axios from 'axios'
 
 const CreateProduct = async (form) => {
-   try {
-      const formData = new FormData();
-      formData.append("name", form.name);
-      formData.append("price", form.price);
-      formData.append("image", form.image);
-
-      const response = await fetch(urlCreateProduct, {
-         method: "POST",
-         body: formData,
-         headers: {
-            Accept: "application/json",
-         },
-      });
-      if (!response.ok) {
-         throw new Error("Network response was not ok");
-      }
-      const responseData = await response.json();
-      return responseData;
-   } catch (err) {
-      throw new Error(err);
-   }
+   const data = new FormData();
+   data.append("name", form.name);
+   data.append("price", form.price);
+   data.append("image", form.image);
+   data.append("uid", getUid())
+   const res = await axios(urlCreateProduct, {
+      method: "POST",
+      headers,
+      data
+   })
+   return res.data
 };
 export default CreateProduct;
