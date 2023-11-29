@@ -3,7 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./css/tailwind.css";
 import { RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
-import { HomePage, ProductPage, SellPage } from "./pages";
+import {
+   HistoryAllPage,
+   HistoryPage,
+   HomePage,
+   ProductPage,
+   RegisterPage,
+   SellPage,
+} from "./pages";
 
 import { ThemeProvider } from "@material-tailwind/react";
 const routes = createBrowserRouter([
@@ -18,6 +25,18 @@ const routes = createBrowserRouter([
    {
       path: "/sell",
       element: <SellPage />,
+   },
+   {
+      path: "/register",
+      element: <RegisterPage />,
+   },
+   {
+      path: "/history/:id",
+      element: <HistoryPage />,
+   },
+   {
+      path: "/history",
+      element: <HistoryAllPage />,
    },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
