@@ -24,7 +24,7 @@ const FormLogin = () => {
             } else {
                setError(false);
                localStorage.setItem("uid", res.data?.uid);
-               navigate("/products");
+               navigate("/history");
             }
          })
          .catch((e) => {
