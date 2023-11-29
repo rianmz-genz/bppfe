@@ -11,9 +11,13 @@ import {
    MdOutlineSell,
    MdOutlineLogout,
 } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineHistory } from "react-icons/ai";
 export function DefaultSidebar() {
+   const navigate = useNavigate();
+   const Logout = () => {
+      navigate("/");
+   };
    return (
       <Card className="h-screen w-full max-w-[20rem] px-4 py-8 fixed top-0 left-0">
          <div className="mb-2 p-4">
@@ -48,7 +52,7 @@ export function DefaultSidebar() {
                </ListItem>
             </Link>
             <hr className="my-2 border-blue-gray-50" />
-            <ListItem>
+            <ListItem onClick={() => Logout()}>
                <ListItemPrefix>
                   <MdOutlineLogout />
                </ListItemPrefix>
