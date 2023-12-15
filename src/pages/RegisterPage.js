@@ -5,7 +5,7 @@ import { BreadCrumbsRegister, FormRegister } from "../components/register";
 
 const RegisterPage = () => {
    return (
-      <div className="w-full h-screen flex justify-center items-center">
+      <div className="w-full min-h-screen my-5 flex justify-center items-center">
          <section className="max-w-[500px] w-full font-poppins">
             <Logo className="mb-6 w-24" />
             <BreadCrumbsRegister />
@@ -13,6 +13,7 @@ const RegisterPage = () => {
             <p className="font-ysabeau">
                <span className="font-bold">EAA</span> Manegement Toko Sederhana.
             </p>
+            <div className="w-full border-t my-3"></div>
             <FormRegister />
             <footer className="text-center mt-3">
                <p className="font-ysabeau">

@@ -4,6 +4,7 @@ import GetOne from "../api/integrations/Sale/GetOne";
 import { HistoryDetail } from "../components/history/detail";
 import DefaultLayout from "../components/layout";
 import generatePDF, { Resolution, Margin } from "react-to-pdf";
+import MeApi from "../api/integrations/Auth/Me";
 
 const options = {
    // default is `save`
@@ -45,6 +46,16 @@ const options = {
 const getTargetElement = () => document.getElementById("content-id");
 
 const Component = ({ data }) => {
+   const [merchant, setMerchant] = useState({});
+   useEffect(() => {
+      MeApi()
+         .then((res) => {
+            if (res.status) {
+               setMerchant(res.data);
+            }
+         })
+         .catch((err) => console.log(err));
+   }, []);
    return (
       <div className="mt-6 border-t border-black/20 pt-6">
          <button
@@ -55,32 +66,74 @@ const Component = ({ data }) => {
          </button>
          <div
             id="content-id"
-            className="w-full pb-3 rounded-md p-4 border border-black/10 bg-white"
+            className="w-full pb-3 p-6 border border-black bg-white"
          >
-            <div className="w-full flex flex-col justify-center items-center">
-               <p className="font-bold text-xl">Management Toko</p>
-               <p className="my-1">
-                  Terimakasih sudah membeli, jangan lupa datang kembali!
-               </p>
+            <div className="flex w-full items-center justify-center">
+               <div className="w-36 rounded-md object-cover mr-4">
+                  <img
+                     className="w-full"
+                     src={`data:image/png;base64,${merchant?.logo}`}
+                     alt={merchant?.name}
+                  />
+               </div>
+               <div className="w-8/12 flex flex-col">
+                  <p>Manajemen Toko EAA</p>
+                  <p className="font-bold text-xl">{merchant.name}</p>
+                  <p className="my-1">
+                     {merchant?.address}, Hp: {merchant?.phone}, Email:{" "}
+                     {merchant?.email}, Tgl: {data.date}
+                  </p>
+               </div>
             </div>
-            <p>Tanggal: {data?.date}</p>
-            <ul className="w-full mb-2 mt-4 border-y pb-4 border-black/20">
-               {data?.line_ids?.map((itemnya, i) => {
-                  return (
-                     <li className="flex items-center justify-center" key={i}>
-                        <p className="w-4/12 text-start">{itemnya.name}</p>
-                        <p className="w-4/12 text-center">{itemnya.qty}x</p>
-                        <p className="w-4/12 text-end">
-                           Rp.{itemnya.price.toLocaleString("id-ID")}
-                        </p>
-                     </li>
-                  );
-               })}
-            </ul>
-            <div className="w-full flex justify-between">
-               <p>Total:</p>
-               <p>Rp. {data?.total?.toLocaleString("id-ID")}</p>
-            </div>
+            <table class="table-fixed w-full mt-6">
+               <thead>
+                  <tr>
+                     <th className="py-2 px-2 border border-black text-left">
+                        QTY
+                     </th>
+                     <th className="py-2 px-2 border border-black text-left">
+                        Nama Barang
+                     </th>
+                     <th className="py-2 px-2 border border-black text-left">
+                        Harga Barang
+                     </th>
+                     <th className="py-2 px-2 border border-black text-left">
+                        Jumlah
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {data?.line_ids?.map((itemnya, i) => {
+                     return (
+                        <tr key={i}>
+                           <td className="py-2 px-2 text-left border border-black">
+                              {itemnya.qty}
+                           </td>
+                           <td className="py-2 px-2 text-left border border-black">
+                              {itemnya.name}
+                           </td>
+                           <td className="py-2 px-2 text-left border border-black">
+                              Rp.{itemnya.price.toLocaleString("id-ID")}
+                           </td>
+                           <td className="py-2 px-2 text-left border border-black">
+                              Rp.{itemnya.total.toLocaleString("id-ID")}
+                           </td>
+                        </tr>
+                     );
+                  })}
+                  <tr>
+                     <td
+                        colSpan={3}
+                        className="py-2 px-2 text-left border border-black"
+                     >
+                        Total
+                     </td>
+                     <td className="py-2 px-2 text-left border border-black">
+                        Rp. {data?.total?.toLocaleString("id-ID")}
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
          </div>
       </div>
    );

@@ -4,6 +4,7 @@ import DefaultLayout from "../components/layout";
 import HistoryAllList from "../components/history";
 import { BreadCrumbsDetailHistory } from "../components/history/detail";
 import Loader from "../components/loader/Loader";
+import { HistoryChart } from "../components/history/chart";
 
 const HistoryAllPage = () => {
    const [data, setData] = useState([]);
@@ -24,7 +25,8 @@ const HistoryAllPage = () => {
          <h1 className="text-4xl font-ysabeau font-bold mb-4 my-2">
             Riwayat Penjualan
          </h1>
-         <div className="flex w-full gap-3">
+         <HistoryChart />
+         <div className="flex w-full gap-3 mt-6">
             <div className="w-6/12 flex flex-col justify-center items-center py-8 bg-green-500/10 text-green-500 rounded-lg">
                <p className="text-4xl font-bold">{data.length}</p>
                <p>Banyak Penjualan</p>
