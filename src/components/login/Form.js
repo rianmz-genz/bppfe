@@ -20,7 +20,7 @@ const FormLogin = () => {
             console.log(res);
             if (!res.status) {
                setIsLoading(false);
-               setError(true);
+               setError(res.message);
             } else {
                setError(false);
                localStorage.setItem("uid", res.data?.uid);
