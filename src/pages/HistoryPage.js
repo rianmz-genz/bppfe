@@ -8,17 +8,17 @@ import MeApi from "../api/integrations/Auth/Me";
 
 const options = {
    // default is `save`
-   method: "open",
+   method: "save",
    // default is Resolution.MEDIUM = 3, which should be enough, higher values
    // increases the image quality but also the size of the PDF, so be careful
    // using values higher than 10 when having multiple pages generated, it
    // might cause the page to crash or hang.
-   resolution: Resolution.HIGH,
+   resolution: Resolution.LOW,
    page: {
       // margin is in MM, default is Margin.NONE = 0
-      margin: Margin.LARGE,
+      margin: Margin.NONE,
       // default is 'A4'
-      format: "letter",
+      format: "credit-card",
       // default is 'portrait'
       orientation: "potrait",
    },
@@ -66,10 +66,10 @@ const Component = ({ data }) => {
          </button>
          <div
             id="content-id"
-            className="w-full pb-3 p-6 border border-black bg-white"
+            className="w-full pb-3 p-6 border border-black bg-white m-1"
          >
             <div className="flex w-full items-center justify-center">
-               <div className="w-36 rounded-md object-cover mr-4">
+               <div className="w-5/12 rounded-md object-cover mr-4">
                   <img
                      className="w-full"
                      src={`data:image/png;base64,${merchant?.logo}`}
@@ -77,15 +77,15 @@ const Component = ({ data }) => {
                   />
                </div>
                <div className="w-8/12 flex flex-col">
-                  <p>Manajemen Toko EAA</p>
-                  <p className="font-bold text-xl">{merchant.name}</p>
-                  <p className="my-1">
+                  <p className="text-xl">Nota Penjualan Manajemen Toko EAA</p>
+                  <p className="font-bold text-3xl">{merchant.name}</p>
+                  <p className="my-1 text-xl">
                      {merchant?.address}, Hp: {merchant?.phone}, Email:{" "}
                      {merchant?.email}, Tgl: {data.date}
                   </p>
                </div>
             </div>
-            <table class="table-fixed w-full mt-6">
+            <table class="table-fixed w-full mt-6 text-lg">
                <thead>
                   <tr>
                      <th className="py-2 px-2 border border-black text-left">
@@ -121,6 +121,14 @@ const Component = ({ data }) => {
                         </tr>
                      );
                   })}
+                  {Array.from({ length: 20 }, (_, index) => (
+                     <tr key={index}>
+                        <td className="py-5 px-5 text-left border border-black"></td>
+                        <td className="py-5 px-5 text-left border border-black"></td>
+                        <td className="py-5 px-5 text-left border border-black"></td>
+                        <td className="py-5 px-5 text-left border border-black"></td>
+                     </tr>
+                  ))}
                   <tr>
                      <td
                         colSpan={3}
