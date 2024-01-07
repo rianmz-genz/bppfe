@@ -13,6 +13,13 @@ const HistoryDetail = ({ data }) => {
             </p>
             <ul className="">
                {data?.line_ids?.map((itemnya, i) => {
+                  if (!itemnya.product_id) {
+                     return (
+                        <div className="mb-3 pb-3 border-b">
+                           Produk sudah dihapus
+                        </div>
+                     );
+                  }
                   return (
                      <CheckoutItem
                         image={itemnya.image}

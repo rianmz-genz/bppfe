@@ -28,6 +28,7 @@ function DialogEditProduct({ name, price, id, getAll }) {
    const submit = () => {
       EditProduct({ id, form })
          .then((res) => {
+            console.log(res);
             if (res.status) {
                setForm({
                   name: "",
@@ -86,7 +87,7 @@ function DialogEditProduct({ name, price, id, getAll }) {
                   <Input
                      label="Foto Produk"
                      type="file"
-                     accept=".png"
+                     accept=".png,.jpeg"
                      size="lg"
                      onChange={(e) =>
                         setForm({ ...form, image: e.target.files[0] })

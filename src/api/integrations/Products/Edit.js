@@ -5,7 +5,7 @@ const EditProduct = async ({ form, id }) => {
       const formData = new FormData();
       formData.append("name", form.name);
       formData.append("price", form.price);
-      formData.append("image", form.image);
+      formData.append("image", form.image ?? false);
 
       const response = await fetch(`${urlEditProduct}/${id}`, {
          method: "POST",

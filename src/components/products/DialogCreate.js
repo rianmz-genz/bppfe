@@ -70,7 +70,7 @@ function DialogCreateProduct({ handleCreate }) {
                   <Input
                      label="Foto Produk"
                      type="file"
-                     accept=".png"
+                     accept=".png,.jpeg"
                      size="lg"
                      onChange={(e) =>
                         setForm({ ...form, image: e.target.files[0] })

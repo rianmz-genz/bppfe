@@ -104,6 +104,9 @@ const Component = ({ data }) => {
                </thead>
                <tbody>
                   {data?.line_ids?.map((itemnya, i) => {
+                     if (!itemnya.product_id) {
+                        return <tr></tr>;
+                     }
                      return (
                         <tr key={i}>
                            <td className="py-2 px-2 text-left border border-black">
