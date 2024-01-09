@@ -12,6 +12,17 @@ const SellPage = () => {
    const navigate = useNavigate();
    const [productSells, setProductSells] = useState([]);
    const date = new Date();
+   function formatDate(date) {
+      var d = new Date(date),
+         month = "" + (d.getMonth() + 1),
+         day = "" + d.getDate(),
+         year = d.getFullYear();
+
+      if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
+
+      return [year, month, day].join("-");
+   }
    useEffect(() => {
       getAll();
    }, []);
@@ -33,7 +44,7 @@ const SellPage = () => {
    };
    const handleCreateSale = () => {
       const dataCo = {
-         date: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
+         date: formatDate(date),
          line_ids: productSells,
       };
       setIsLoading(true);
